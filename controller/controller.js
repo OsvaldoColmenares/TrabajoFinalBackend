@@ -1,6 +1,7 @@
 const { User } = require("../models/users");
 const { Product } = require("../models/products");
 const { validationResult } = require("express-validator");
+const axios = require('axios');
 
 const controllers = {
     myIndex(req, res){
@@ -81,6 +82,14 @@ const controllers = {
             });
         }
     },
+    verProductosCrypto: async (req,res) =>{
+        try {
+            const result = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
+            res.json({status: result.status, data: result.data});
+        } catch (error) {
+            res.json({status: error.response.status, data: error.response.data})
+        }
+    }
 
 }
 
