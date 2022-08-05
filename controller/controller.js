@@ -1,5 +1,6 @@
 const { User } = require("../models/users");
 const { Product } = require("../models/products");
+const { validationResult } = require("express-validator");
 
 const controllers = {
     myIndex(req, res){
@@ -25,9 +26,15 @@ const controllers = {
     },
     registrarProducto: async (req, res) => {
         try{
-            const product = new Product(req.body);
-            await product.save();
-            res.status(201).json(product);
+            const error = validationResult(req);
+            if(error.isEmpty()){
+                const product = new Product(req.body);
+                await product.save();
+                res.status(201).json(product);               
+            }
+            else{
+                res.status(501).json(error);
+            }            
         }
         catch(err)
         {
@@ -42,10 +49,16 @@ const controllers = {
         res.json({product})
     },
     actualizarProducto: async (req, res) => {
-        try{
-            const { id } = req.params;
-            await Product.findByIdAndUpdate(id, req.body);          
-            res.status(201).json({"result": "Se actualizo el producto."});           
+        try{   
+            const error = validationResult(req);
+            if(error.isEmpty()){
+                const { id } = req.params;
+                await Product.findByIdAndUpdate(id, req.body);          
+                res.status(201).json({"result": "Se actualizo el producto."});                
+            }
+            else{
+                res.status(501).json(error);
+            }            
         }
         catch(err)
         {
