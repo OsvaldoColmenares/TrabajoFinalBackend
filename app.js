@@ -7,6 +7,7 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const productsCryptoRouter = require('./routes/productsCrypto');
 const {dbConnection} = require('./db/db');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/productsCrypto', productsCryptoRouter);
 dbConnection();
 
 module.exports = app;
