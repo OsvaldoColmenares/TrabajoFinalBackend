@@ -40,7 +40,35 @@ const controllers = {
     verProducto: async (req, res) => {
         const product = await Product.find();
         res.json({product})
-    }
+    },
+    actualizarProducto: async (req, res) => {
+        try{
+            const { id } = req.params;
+            await Product.findByIdAndUpdate(id, req.body);          
+            res.status(201).json({"result": "Se actualizo el producto."});           
+        }
+        catch(err)
+        {
+            res.status(501).json({
+                msg: "No se puede actualizar ese producto.",
+                err,
+            });
+        }
+    },
+    eliminarProducto: async (req, res) => {
+        try{
+            await Product.findByIdAndDelete(req.params.id);              
+            res.status(201).json({"result": "Se elimino el producto."});  
+        }
+        catch(err)
+        {
+            res.status(501).json({
+                msg: "No se puede eliminar ese producto.",
+                err,
+            });
+        }
+    },
+
 }
 
 module.exports = controllers;
