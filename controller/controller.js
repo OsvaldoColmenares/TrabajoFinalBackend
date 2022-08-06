@@ -9,13 +9,19 @@ const controllers = {
     },   
     newUser: async (req, res) => {
         try{
-            const user = new User(req.body);
-            await user.save();
-            res.status(201).json(user);
+            const error = validationResult(req);
+            if(error.isEmpty()){
+                const user = new User(req.body);
+                await user.save();
+                res.status(201).json(user);
+            }
+            else{
+                res.status(400).json(error);
+            }     
         }
         catch(err)
         {
-            res.status(501).json({
+            res.status(500).json({
                 msg: "Ese email ya existe, no se puede guardar ese usuario.",
                 err,
             });
@@ -34,20 +40,25 @@ const controllers = {
                 res.status(201).json(product);               
             }
             else{
-                res.status(501).json(error);
+                res.status(400).json(error);
             }            
         }
         catch(err)
         {
-            res.status(501).json({
+            res.status(500).json({
                 msg: "Ese producto ya existe, no se puede guardar.",
                 err,
             });
         }
     },
-    verProducto: async (req, res) => {
+    verProductos: async (req, res) => {
         const product = await Product.find();
         res.json({product})
+    },
+    verProducto: async (req, res) => {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+        res.json({product});       
     },
     actualizarProducto: async (req, res) => {
         try{   
@@ -55,15 +66,15 @@ const controllers = {
             if(error.isEmpty()){
                 const { id } = req.params;
                 await Product.findByIdAndUpdate(id, req.body);          
-                res.status(201).json({"result": "Se actualizo el producto."});                
+                res.status(200).json({"result": "Se actualizo el producto."});                
             }
             else{
-                res.status(501).json(error);
+                res.status(400).json(error);
             }            
         }
         catch(err)
         {
-            res.status(501).json({
+            res.status(500).json({
                 msg: "No se puede actualizar ese producto.",
                 err,
             });
@@ -85,12 +96,25 @@ const controllers = {
     verProductosCrypto: async (req,res) =>{
         try {
             const result = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
-            res.json({status: result.status, data: result.data});
+            res.json({status: result.status, response: result.data});
         } catch (error) {
-            res.json({status: error.response.status, data: error.response.data})
+            res.json({status: error.response.status, response: error.response.data})
         }
-    }
-
+    },
+    verProductoCrypto: async (req,res) =>{
+        try {             
+            const parametros = {
+                params:{
+                    vs_currency: "usd",
+                    ids: req.params.id
+                }
+            }
+            const result = await axios.get("https://api.coingecko.com/api/v3/coins/markets", parametros);
+            res.json({status: result.status, response: result.data});
+        } catch (error) {
+            res.json({status: error.response.status, response: error.response.data})
+        }
+    }  
 }
 
 module.exports = controllers;

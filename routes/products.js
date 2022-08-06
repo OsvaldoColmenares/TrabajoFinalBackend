@@ -3,11 +3,152 @@ var router = express.Router();
 const controllers = require('../controller/controller');
 const {validarId} = require('../middleware/validarId');
 const {check, validationResult, body} = require("express-validator");
+const {logger} = require('../middleware/logger');
+/**
+ * @swagger 
+ * components:
+ *  schemas:
+ *      Product:
+ *          type: object
+ *          properties:
+ *              descripcion:
+ *                  type: string
+ *                  description: Descripción del producto.
+ *              precio:
+ *                  type: number
+ *                  description: Precio del producto.
+ *          required:
+ *              - descripcion
+ *              - precio
+ *          example:
+ *              descripcion: Monitor 24' Dell x2
+ *              precio: 40999.99
+ */
 
-/* GET users listing. */
-router.post('/registrarProducto',[check("descripcion").not().isEmpty().withMessage("Tiene que ingresar una descripción del producto.")], controllers.registrarProducto);
-router.put('/actualizarProducto/:id',validarId,[check("descripcion").not().isEmpty().withMessage("Tiene que ingresar una descripción del producto.")], controllers.actualizarProducto);
-router.delete('/eliminarProducto/:id',validarId, controllers.eliminarProducto);
-router.get('/verProducto', controllers.verProducto);
+/**
+ * @swagger
+ * /products/registrarProducto:
+ *      post:
+ *          summary: Registrar un nuevo producto.
+ *          tags: [Product]
+ *          requestBody:
+ *              required: true
+ *              content:    
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/Product'
+ *          responses:
+ *              201:
+ *                  description: Nuevo producto registrado.
+ *              404:
+ *                  description: No se encuentra el producto.
+ *              500:
+ *                  description: Error de servidor .            
+ * 
+ */
+router.post('/registrarProducto',[check("descripcion").not().isEmpty().withMessage("Tiene que ingresar una descripción del producto.")],logger, controllers.registrarProducto);
+/**
+ * @swagger
+ * /products/actualizarProducto/{id}:
+ *      put:
+ *          summary: Actualizar un producto.
+ *          tags: [Product]
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                schema: 
+ *                  type: string
+ *                required: true
+ *                description: Id del producto                
+ *          requestBody:
+ *              required: true
+ *              content:    
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/Product'
+ *          responses:
+ *              200:
+ *                  description: Producto actualizado.
+ *              404:
+ *                  description: No se encuentra el producto.
+ *              500:
+ *                  description: Error de servidor .            
+ * 
+ */
+router.put('/actualizarProducto/:id',validarId,[check("descripcion").not().isEmpty().withMessage("Tiene que ingresar una descripción del producto.")],logger, controllers.actualizarProducto);
+/**
+ * @swagger
+ * /products/eliminarProducto/{id}:
+ *      delete:
+ *          summary: Eliminar un producto.
+ *          tags: [Product]
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                schema: 
+ *                  type: string
+ *                required: true
+ *                description: Id del producto  
+ *          responses:
+ *              200:
+ *                  description: Producto eliminado.
+ *              404:
+ *                  description: No se encuentra el producto.
+ *              500:
+ *                  description: Error de servidor .            
+ * 
+ */
+router.delete('/eliminarProducto/:id',validarId,logger, controllers.eliminarProducto);
+/**
+ * @swagger
+ * /products/verProductos:
+ *      get:
+ *          summary: Ver todos los productos.
+ *          tags: [Product]        
+ *          responses:
+ *              200:
+ *                  description: Todos los productos.
+ *                  content:    
+ *                   application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/Product'
+ *              404:
+ *                  description: No se encontraron productos.
+ *              500:
+ *                  description: Error de servidor .            
+ * 
+ */
+router.get('/verProductos', logger, controllers.verProductos);
+/**
+ * @swagger
+ * /products/verProducto/{id}:
+ *      get:
+ *          summary: Buscar un producto.
+ *          tags: [Product]
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                schema: 
+ *                  type: string
+ *                required: true
+ *                description: Id del producto  
+ *          responses:
+ *              200:
+ *                  description: Producto encontrado.
+ *                  content:    
+ *                   application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/Product'
+ *              404:
+ *                  description: No se encuentra el producto.
+ *              500:
+ *                  description: Error de servidor .            
+ * 
+ */
+router.get('/verProducto/:id', logger, controllers.verProducto);
 
 module.exports = router;
