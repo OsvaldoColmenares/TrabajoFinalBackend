@@ -9,20 +9,20 @@
 
   
 
- - Postman collections
-    <br/>
-    Las colecciones para probar los endpoint estan en la carpeta "coleccionParaPostman".
+ - Postman
+    <br>
+    Las colecciones para probar los endpoint están en la carpeta "coleccionParaPostman".
     ![Postman](./public/images/postman.png)
    
-  <br/>
+  <br>
  - Swagger
-  <br/>
+  <br>
    Los endpoint también se pueden probar utilizando swagger.
    <img src="./public/images/swagger.png">
-   <br/>
+   <br>
   
 
-<h4  align="left">Languages and Tools:</h4>
+<h4  align="left">Lenguajes y herramientas:</h4>
 
 <p  align="left">  <a  href="https://expressjs.com"  target="_blank"  rel="noreferrer">  <img  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg"  alt="express"  width="40"  height="40"/>  </a>  <a  href="https://www.mongodb.com/"  target="_blank"  rel="noreferrer">  <img  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg"  alt="mongodb"  width="40"  height="40"/>  </a>  <a  href="https://nodejs.org"  target="_blank"  rel="noreferrer">  <img  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg"  alt="nodejs"  width="40"  height="40"/>  </a>  </p>
 
