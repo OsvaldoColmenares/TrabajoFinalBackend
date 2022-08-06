@@ -17,7 +17,7 @@
   <br>
  - Swagger
   <br>
-   Los endpoint también se pueden probar utilizando swagger.
+   Los endpoint también se pueden probar utilizando swagger (http://localhost:8080/swagger/)
    <img src="./public/images/swagger.png">
    <br>
   
