@@ -17,8 +17,8 @@
   <br/>
  - Swagger
   <br/>
-   Los endpoint también se pueden probar utilizando swagger.   
-   ![Swagger](./public/images/swagger.png)
+   Los endpoint también se pueden probar utilizando swagger.
+   <img src="./public/images/swagger.png">
    <br/>
   
 
