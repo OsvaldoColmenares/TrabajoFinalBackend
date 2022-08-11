@@ -7,7 +7,7 @@ const {logger} = require('../middleware/logger');
  * @swagger
  * /productsCrypto/verProductosCrypto:
  *      get:
- *          summary: Ver precios de Cryptos en usd.
+ *          summary: Ver precio de todas las Cryptos en usd.
  *          tags: [ProductsCryptos]          
  *          responses:
  *              200:
@@ -23,7 +23,7 @@ router.get('/verProductosCrypto',logger, controllers.verProductosCrypto)
  * @swagger
  * /productsCrypto/verProductoCrypto/{id}:
  *      get:
- *          summary: Ver precio de Crypto en usd.
+ *          summary: Ver precio de una Crypto en usd.
  *          tags: [ProductsCryptos]    
  *          parameters:
  *              - in: path

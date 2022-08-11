@@ -13,6 +13,7 @@ const {logger} = require('../middleware/logger');
  *          properties:
  *              descripcion:
  *                  type: string
+ *                  unique: true
  *                  description: Descripción del producto.
  *              precio:
  *                  type: number
@@ -60,7 +61,7 @@ router.post('/registrarProducto',[check("descripcion").not().isEmpty().withMessa
  *                schema: 
  *                  type: string
  *                required: true
- *                description: Id del producto                
+ *                description: Id del producto - Ejemplo - 62eda2175d609128146a3194                 
  *          requestBody:
  *              required: true
  *              content:    
@@ -90,7 +91,7 @@ router.put('/actualizarProducto/:id',validarId,[check("descripcion").not().isEmp
  *                schema: 
  *                  type: string
  *                required: true
- *                description: Id del producto  
+ *                description: Id del producto - Ejemplo - 62eda2175d609128146a3194   
  *          responses:
  *              200:
  *                  description: Producto eliminado.
@@ -134,7 +135,7 @@ router.get('/verProductos', logger, controllers.verProductos);
  *                schema: 
  *                  type: string
  *                required: true
- *                description: Id del producto  
+ *                description: Id del producto - Ejemplo - 62eda2175d609128146a3194  
  *          responses:
  *              200:
  *                  description: Producto encontrado.
@@ -149,6 +150,6 @@ router.get('/verProductos', logger, controllers.verProductos);
  *                  description: Error de servidor .            
  * 
  */
-router.get('/verProducto/:id', logger, controllers.verProducto);
+router.get('/verProducto/:id',validarId, logger, controllers.verProducto);
 
 module.exports = router;
