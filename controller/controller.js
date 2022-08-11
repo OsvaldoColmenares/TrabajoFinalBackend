@@ -2,6 +2,8 @@ const { User } = require("../models/users");
 const { Product } = require("../models/products");
 const { validationResult } = require("express-validator");
 const axios = require('axios');
+const URL_CRYPTO_MARTKETS_USD = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd";
+const URL_CRYPTO_MARTKETS = "https://api.coingecko.com/api/v3/coins/markets";
 
 const controllers = {
     myIndex(req, res){
@@ -95,10 +97,13 @@ const controllers = {
     },
     verProductosCrypto: async (req,res) =>{
         try {
-            const result = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd");
+            const result = await axios.get(URL_CRYPTO_MARTKETS_USD, {timeout: 10000});
             res.json({status: result.status, response: result.data});
         } catch (error) {
-            res.json({status: error.response.status, response: error.response.data})
+            res.status(501).json({
+                msg: "No se puede obtener datos de ese endpoint.",
+                error,
+            });
         }
     },
     verProductoCrypto: async (req,res) =>{
@@ -109,10 +114,13 @@ const controllers = {
                     ids: req.params.id
                 }
             }
-            const result = await axios.get("https://api.coingecko.com/api/v3/coins/markets", parametros);
+            const result = await axios.get(URL_CRYPTO_MARTKETS, parametros, {timeout: 10000});
             res.json({status: result.status, response: result.data});
         } catch (error) {
-            res.json({status: error.response.status, response: error.response.data})
+            res.status(501).json({
+                msg: "No se puede obtener datos de ese endpoint.",
+                error,
+            });
         }
     }  
 }

@@ -9,7 +9,6 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const productsCryptoRouter = require('./routes/productsCrypto');
 const {dbConnection} = require('./db/db');
-//agrego swagger
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerSpec = {
