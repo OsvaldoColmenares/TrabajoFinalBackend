@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const storeSchema = new Schema({   
     descripcion:{
         type:String,
-        required:true        
+        required:true,
+        unique:true       
     },
     precio:{
         type: Number,

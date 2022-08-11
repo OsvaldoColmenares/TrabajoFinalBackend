@@ -1,25 +1,20 @@
 
 <h1  align="center">Academia Numen Desarrollo Web Full Stack</h1>
 
-<h3  align="center">Autor: Osvaldo Colmenares</h3>
+<h3  align="center">Autor: Osvaldo Colmenares</h3>  
 
-  
+🔭 Proyecto Backend **fs-1021** 
 
-🔭 Proyecto Backend **fs-1021**
-
-  
-
- - Postman
-    <br>
-    Las colecciones para probar los endpoint están en la carpeta "coleccionParaPostman".
-    ![Postman](./public/images/postman.png)
-   
+  Postman
   <br>
- - Swagger
+    Las colecciones para probar los endpoint están en la carpeta "coleccionParaPostman".
+    ![Postman](./public/images/postman.png)   
+  <br>
+  Swagger
   <br>
    Los endpoint también se pueden probar utilizando swagger (http://localhost:8080/swagger/)
    <img src="./public/images/swagger.png">
-   <br>
+  <br>
   
 
 <h4  align="left">Lenguajes y herramientas:</h4>
